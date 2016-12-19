@@ -1,7 +1,9 @@
 package com.copart.main;
 
-import java.io.FileWriter;
-import java.util.HashMap;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Map;
 
 import org.json.simple.parser.ParseException;
@@ -15,8 +17,25 @@ public class AppTest {
 		
 		Map<String,String> facilitiesMap=Utilities.parseCSV();
 		Map<String,String> customerMap=Utilities.parseCustomerCSV();
-		String customerId="12345";
-		String zipCode="75252";
+	
+		String file = "data/input.txt";
+		BufferedReader br = null;
+		try {
+			br = new BufferedReader(new FileReader(file));
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		}
+		
+		String data = null;
+		try {
+			data = br.readLine();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		String custData[]=data.split(",");
+		String customerId=custData[0];
+		String zipCode=custData[1];
 		
 		try {
 			String appFacility=getAppropriateFacility(customerId,zipCode,customerMap,facilitiesMap);
