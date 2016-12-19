@@ -44,7 +44,7 @@ public class Utilities {
                 }
             }
         }
-        System.out.println(customer.size());
+       //System.out.println(customer.size());
         return customer;
     }
 	
